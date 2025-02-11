@@ -3,6 +3,13 @@
   <arg name="hydro_debug" default="0" />
   <arg name="config" default="base" />
   <arg name="simulation" default="false" />
+  <arg name="mass"  default="35.0"/>
+  <arg name="cog_y" default="0.0"/>
+  <arg name="mi_z"  default="8.061"/>
+  <arg name="rdl"   default="5.83"/>
+  <arg name="rdq"   default="17.34"/>
+  <arg name="sdl"   default="0.0"/>
+  <arg name="sdq"   default="17.26"/>
 
   <!-- Vehicle's namespace -->
   <arg name="namespace" default=""/>
@@ -13,7 +20,9 @@
       <param name="robot_description"
              command="$(find heron_description)/scripts/env_run $(find heron_description)/urdf/configs/$(arg config)
                       $(find xacro)/xacro '$(find heron_description)/urdf/heron.urdf.xacro'
-                      debug:=$(arg hydro_debug) simulation:=$(arg simulation)" />
+                      debug:=$(arg hydro_debug) simulation:=$(arg simulation)
+                      mass:=$(arg mass) cog_y:=$(arg cog_y) mi_z:=$(arg mi_z)
+                      rdl:=$(arg rdl) rdq:=$(arg rdq) sdl:=$(arg sdl) sdq:=$(arg sdq)" />
     </group>
 
     <group unless="$(eval namespace == '')">
@@ -27,7 +36,7 @@
     <!-- A joint state publisher plugin already is started with the model, no need to use the default joint state publisher -->
 
     <!-- Publish robot model for ROS -->
-    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen" />
   </group>
 
 </launch>

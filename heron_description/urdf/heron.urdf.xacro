@@ -29,13 +29,20 @@ This program contains the description of the robot base model for the Clearpath 
   <xacro:arg name="debug" default="0"/>
   <xacro:arg name="namespace" default=""/>
   <xacro:arg name="suffix_ns" default="$(arg namespace)"/>
+  <xacro:arg name="mass"  default="35.0"/>
+  <xacro:arg name="cog_y" default="0.0"/>
+  <xacro:arg name="mi_z"  default="8.061"/>
+  <xacro:arg name="rdl"   default="5.83" />
+  <xacro:arg name="rdq"   default="17.34" />
+  <xacro:arg name="sdl"   default="0.0" />
+  <xacro:arg name="sdq"   default="17.26" />
 
   <!-- Include the ROV macro file -->
   <xacro:include filename="$(find heron_description)/urdf/base.xacro"/>
   <xacro:include filename="$(find heron_description)/urdf/gazebo.xacro"/>
 
   <!-- Create the heron -->
-  <xacro:heron_base namespace="$(arg suffix_ns)">
+  <xacro:heron_base namespace="$(arg suffix_ns)" mass="$(arg mass)" cog_y="$(arg cog_y)" mi_z="$(arg mi_z)">
     <!-- The underwater object plugin is given as an input block parameter to
      allow the addition of external models of manipulator units -->
     <gazebo>
@@ -44,7 +51,7 @@ This program contains the description of the robot base model for the Clearpath 
         <flow_velocity_topic>hydrodynamics/current_velocity</flow_velocity_topic>
         <debug>$(arg debug)</debug>
         <!-- Adding the hydrodynamic and hydrostatic parameters for the vehicle-->
-        <xacro:heron_hydro_model namespace="$(arg suffix_ns)" />
+        <xacro:heron_hydro_model namespace="$(arg suffix_ns)" rdl="$(arg rdl)" rdq="$(arg rdq)" sdl="$(arg sdl)" sdq="$(arg sdq)"/>
         <!--
           In case other modules are added to the vehicle (such as a manipulator)
           that also have link running with the underwater object plugin, they

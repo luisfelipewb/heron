@@ -4,9 +4,9 @@
     Vehicle's parameters (remember to enter the model parameters below)
   -->
 
-  <xacro:property name="mass" value="28"/>
+  <!-- <xacro:property name="mass" value="28"/> -->
   <!-- Center of gravity -->
-  <xacro:property name="cog" value="0 0 -0.13"/>
+  <!-- <xacro:property name="cog" value="0 0 -0.13"/> -->
   <!-- Fluid density -->
   <xacro:property name="rho" value="1028"/>
 
@@ -50,8 +50,7 @@
     </xacro:macro>
 
   <!-- Vehicle macro -->
-  <xacro:macro name="heron_base" params="namespace *gazebo">
-
+  <xacro:macro name="heron_base" params="namespace mass cog_y mi_z *gazebo">
 
       <!-- Rigid body description of the base link -->
       <link name="${namespace}base_link">
@@ -80,8 +79,8 @@
       <link name="${namespace}dummy_link">
         <inertial>
           <mass value="${mass}" />
-          <origin xyz="${cog}" rpy="0 0 0"/>
-          <inertia ixx="10" ixy="0" iyy = "10" ixz="0" iyz="0" izz="10" />
+          <origin xyz="0 ${cog_y} -0.13" rpy="0 0 0"/>
+          <inertia ixx="1" ixy="0" iyy = "2" ixz="0" iyz="0" izz="${mi_z}" />
           <!-- <inertia ixx="0.017474" ixy="-0.000013" ixz="-0.000102"
                                   iyy="0.017781"  iyz="-0.000058"
                                                   izz="0.033235" /> -->

@@ -4,7 +4,7 @@
   <!-- GPS -->
   <gazebo>
     <xacro:property name="datum_env" value="$(optenv GPS_DATUM '49.9, 8.9')"/>
-    <xacro:property name="datum" value="${map(float, datum_env.split(','))}" />
+    <xacro:property name="datum" value="${list(map(float, datum_env.split(',')))}" />
     <xacro:property name="datum_lat" value="${datum[0]}" />
     <xacro:property name="datum_lon" value="${datum[1]}" />
     <plugin name="gps_controller" filename="libhector_gazebo_ros_gps.so">
@@ -18,7 +18,7 @@
       <referenceLongitude>${datum_lon}</referenceLongitude>
       <referenceHeading>90</referenceHeading>
       <referenceAltitude>0</referenceAltitude>
-      <drift>0.0001 0.0001 0.0001</drift>
+      <drift>0.0 0.0 0.0</drift>
     </plugin>
   </gazebo>
   <link name="$(arg suffix_ns)navsat_link" />
@@ -39,12 +39,12 @@
         <bodyName>$(arg suffix_ns)imu_link</bodyName>
         <frameId>$(arg suffix_ns)imu_link</frameId>
         <topicName>/$(arg suffix_ns)imu/data_raw</topicName>
-        <accelDrift>0.005 0.005 0.005</accelDrift>
-        <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
-        <rateDrift>0.005 0.005 0.005 </rateDrift>
-        <rateGaussianNoise>0.005 0.005 0.005 </rateGaussianNoise>
-        <headingDrift>0.005</headingDrift>
-        <headingGaussianNoise>0.005</headingGaussianNoise>
+        <accelDrift>0.0 0.0 0.0</accelDrift>
+        <accelGaussianNoise>0.0 0.0 0.0</accelGaussianNoise>
+        <rateDrift>0.0 0.0 0.0 </rateDrift>
+        <rateGaussianNoise>0.0 0.0 0.0 </rateGaussianNoise>
+        <headingDrift>0.000</headingDrift>
+        <headingGaussianNoise>0.000</headingGaussianNoise>
       </plugin>
     </gazebo>
 
@@ -64,8 +64,8 @@
         <frameId>$(arg suffix_ns)imu_link</frameId>
         <topicName>/$(arg suffix_ns)imu/mag_raw</topicName>
         <referenceHeading>90</referenceHeading>
-        <drift>0.0005 0.0005 0.0005</drift>
-        <gaussianNoise>0.025 0.025 0.025</gaussianNoise>
+        <drift>0.0 0.0 0.0</drift>
+        <gaussianNoise>0.0 0.0 0.0</gaussianNoise>
         <useMagneticFieldMsgs>false</useMagneticFieldMsgs>
       </plugin>
     </gazebo>

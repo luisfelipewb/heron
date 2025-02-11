@@ -12,7 +12,7 @@
     <xacro:property name="heron_width"  value="1.0"/>
     <xacro:property name="heron_height" value="0.32"/>
 
-    <xacro:macro name="heron_hydro_model" params="namespace">
+    <xacro:macro name="heron_hydro_model" params="namespace rdl rdq sdl sdq">
 
       <!-- List of hydrodynamic models this robot's links -->
       <link name="${namespace}base_link">
@@ -42,10 +42,10 @@
                 </added_mass>
                 <offset_added_mass>0</offset_added_mass>
                   <linear_damping>
-                      -16.44998712 -15.79776044 -100 -13 -13 -6
+                    -${sdl}, -100, -100.0, -13.0, -13.0, -${rdl}
                   </linear_damping>
                   <quadratic_damping>
-                    -2.942 -2.7617212 -10 -5 -5 -5
+                    -${sdq}, -100, -10.0, -5.0, -5.0, -${rdq}
                   </quadratic_damping>
 
                   <!-- Sanity check -->
